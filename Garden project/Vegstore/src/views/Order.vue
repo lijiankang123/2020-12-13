@@ -32,7 +32,7 @@
         <mt-tab-container-item>
           <div class="main-top" v-for="(item,index) of goods" :key="index">
               <div class="main-time">
-                <p>{{this.moment.unix(item.orderdate).format('Y年 M月 DD日 dddd HH:mm:SS')}}</p>
+                <p>{{moment.unix(item.orderdate).format('Y年 M月 DD日 dddd HH:mm:SS')}}</p>
                 <p>{{item.orderstate}}</p>
               </div>
               <router-link :to="`/details/${item.goodsid}`">
@@ -271,6 +271,11 @@ export default {
     }).then((res)=>{
       // console.log(res.data);
       let goods = res.data.results;
+      goods.forEach(good=>{
+          if(good.image!=null){
+            good.image = require('../assets/images/vegetables/vegetable/' + good.image)
+          }
+        })
       this.goods = goods;
       // this.goods.push(goods);
       // console.log(goods);

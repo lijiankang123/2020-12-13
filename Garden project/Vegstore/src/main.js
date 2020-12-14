@@ -10,7 +10,7 @@ import moment from 'moment'
 Vue.config.productionTip = false;
 axios.defaults.baseURL = 'http://127.0.0.1:3000';
 Vue.prototype.axios = axios;
-Vue.prototype.monent = moment;
+Vue.prototype.moment = moment;
 
 Vue.use(MintUI);
 

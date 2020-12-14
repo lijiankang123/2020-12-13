@@ -38,15 +38,29 @@ server.get('/classify',(req,res)=>{
 //获取指定分类下包含的商品订单
 server.get('/goods',(req,res)=>{
   let id = req.query.id;
-  let sql = 'SELECT o.id,goodsid,totalmoney,orderdate,orderstate,image,content FROM ctt_order AS o INNER JOIN ctt_goods AS g ON g.id=goodsid  WHERE order_id=?';
-  pool.query(sql,[id],(error,results)=>{
-    if(error) throw error;
-    res.send({
-      cood:200,
-      message:"查询成功",
-      results:results
-    })
-  })
+  let sql;
+  if(id == 1){
+    sql = 'SELECT o.id,goodsid,totalmoney,orderdate,orderstate,image,content FROM ctt_order AS o INNER JOIN ctt_goods AS g ON g.id=goodsid';
+      pool.query(sql,[id],(error,results)=>{
+        if(error) throw error;
+        res.send({
+          cood:200,
+          message:"查询成功",
+          results:results
+        })
+      })
+      }else{
+        sql = 'SELECT o.id,goodsid,totalmoney,orderdate,orderstate,image,content FROM ctt_order AS o INNER JOIN ctt_goods AS g ON g.id=goodsid  WHERE order_id=?';
+          pool.query(sql,[id],(error,results)=>{
+            if(error) throw error;
+            res.send({
+              cood:200,
+              message:"查询成功",
+              results:results
+            })
+          })
+      }
+  
 })
 
 // 获取图片等信息
@@ -62,4 +76,28 @@ server.get('/goods',(req,res)=>{
 //   })
 // })
 // 指定web服务器监听对象
+server.post('/register',(req,res)=>{
+  let username = req.body.username;
+  let password = req.body.password;
+  let sql = 'SELECT COUNT(id) AS count FROM ctt_user WHERE username=?';
+  pool.query(sql,[username],(error,results)=>{
+    if(error) throw error;
+    // console.log(results[0].count);
+    if(results[0].count){
+      res.send({
+        cood:201,
+        message:'用户已存在，注册失败'
+      })
+    }else{
+     sql = 'INSERT INTO ctt_user(username,password) VALUES(?,MD5(?))';
+     pool.query(sql,[username,password],(error,results)=>{
+       if(error) throw error;
+       res.send({
+        cood:200,
+        message:'注册成功'
+      })
+     })
+    }
+  })
+})
 server.listen(3000);
