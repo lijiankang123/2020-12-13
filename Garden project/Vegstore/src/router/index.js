@@ -7,10 +7,15 @@ import Order from '../views/Order'
 import Details from '../views/Details'
 import Eval from '../views/Eval'
 import Shopcart from '../views/Shopcart'
+import Index from '../views/Index'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/index',
+    component:Index
+  },
   {
     path:'/shopcard',
     component:Shopcart

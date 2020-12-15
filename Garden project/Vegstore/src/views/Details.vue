@@ -40,6 +40,19 @@
         <button>加入购物车</button>
       </div>
     </div>
+    <!-- 售后无忧 -->
+    <div class="shouhou">
+      <div>
+        <img src="../assets/images/icon/shouhouwuyou.png">
+      </div>
+      <p>售后无忧 <span> | 品质保障·极速退款·次日自提</span></p>
+    </div>
+
+    <!-- 图文 -->
+    <div class="image-text">
+      <p>图文详情</p>
+      
+    </div>
   </div>
 </template>
 
@@ -80,6 +93,9 @@ export default {
     display: flex;
     justify-content: space-between;
   }
+  .top_title{
+    padding: 10px;
+  }
   .top_title img{
     width: 25px;
     height: 25px;
@@ -104,6 +120,28 @@ export default {
     border: 0;
     outline: 0;
     color: white;
+  }
+  .shouhou{
+    padding: 5px 10px;
+    margin:5px 15px; 
+    /* margin-top:5px;  */
+    display: flex;
+    align-items: center;
+    background-color: #ccc;
+    border-radius:5px; 
+  }
+  .shouhou img{
+    width: 18px;
+    height: 18px;
+    margin-right: 5px; 
+  }
+  .shouhou p{
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .shouhou span{
+    font-size: 13px;
+    font-weight: lighter;
   }
 </style>
 

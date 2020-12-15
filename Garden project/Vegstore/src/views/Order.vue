@@ -32,7 +32,7 @@
         <mt-tab-container-item>
           <div class="main-top" v-for="(item,index) of goods" :key="index">
               <div class="main-time">
-                <p>{{moment.unix(item.orderdate).format('Y年 M月 DD日 dddd HH:mm:SS')}}</p>
+                <p>{{moment.unix(item.orderdate).format('Y年 M月 DD日')}}</p>
                 <p>{{item.orderstate}}</p>
               </div>
               <router-link :to="`/details/${item.goodsid}`">
@@ -242,7 +242,7 @@ export default {
     active(val){
       console.log(val)
       this.goods = [];
-      this.axios.get('/goods',{
+      this.axios.get('/order',{
         params:{
           id:val
         }
@@ -264,7 +264,7 @@ export default {
       let results = res.data.results;
       this.classify = results
     });
-    this.axios.get('/goods',{
+    this.axios.get('/order',{
       params:{
         id:this.active
       }

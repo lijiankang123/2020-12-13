@@ -130,10 +130,10 @@
             if(res.data.cood == 200){
               this.$router.push('/order');
             }
-          })
+          });
         }
-      }
-    }
-  }
+      },
+    },
+  };
   </script>
   
