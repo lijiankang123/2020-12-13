@@ -48,11 +48,11 @@
 
 
 <style scoped>
-.register{
+/* .register{
   display: flex;
   z-index: 2;
   background-image: url(../assets/images/fruits/fruit/ee2cc3ed53409750.jpg)
-}
+} */
 </style>
 
 

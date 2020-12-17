@@ -8,10 +8,20 @@ import Details from '../views/Details'
 import Eval from '../views/Eval'
 import Shopcart from '../views/Shopcart'
 import Index from '../views/Index'
+import Register1 from '../views/Register1'
+import Login1 from '../views/Login1'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/login1',
+    component:Login1
+  },
+  {
+    path:'/register1',
+    component:Register1
+  },
   {
     path:'/index',
     component:Index

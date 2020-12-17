@@ -22,6 +22,64 @@ const pool=mysql.createPool({
   connectionLimit:15
 })
 
+
+
+
+///////////////////////////////////////////////////
+//    注册接口
+server.post('/register', (req, res) => {
+
+  //console.log(md5('12345678'));
+  console.log(res.body);
+  //获取用户名和密码信息
+  let username = req.body.username;
+  let password = req.body.password;
+  // 先需要以username为条件进行用户的查找操作
+  let sql = 'SELECT COUNT(id) AS count FROM ctt_user WHERE username=?';
+  // 执行SQL查询
+  pool.query(sql, [username], (error, results) => {        
+    if (error) throw error;
+    if (results[0].count) {
+      res.send({ code: 201, message: "用户注册失败" });
+    } else {
+      // 插入记录的SQL语句
+      sql = 'INSERT INTO ctt_user(username,password) VALUES(?,MD5(?))';
+      // 执行SQL语句
+      pool.query(sql, [username, password], (error, results) => {
+        if (error) throw error;
+        //console.log(results);
+        res.send({ code: 200, message: "用户注册成功" })
+      })
+    }
+  });
+
+});
+
+
+/////////////////////////////////////////////////////
+/////   登录接口
+server.post('/login',(req,res)=>{
+  // 获取用户名和密码信息
+  let username = req.body.username;
+  let password = md5(req.body.password);
+  // SQL查询语句
+  let sql = 'SELECT id,username,nickname,avatar FROM ctt_user WHERE username=? AND password=?';
+  // 执行SQL查询
+  pool.query(sql,[username,password],(error,results)=>{
+    if(error) throw error;
+    if(results.length){
+      res.send({code:200,message:"登录成功",info:results[0]});
+    } else {
+      res.send({code:201,message:"登录失败"});
+    }
+  });
+});
+
+
+
+
+
+
 //获取ctt_state 表中的id和state数据
 server.get('/classify',(req,res)=>{
   let sql = 'SELECT id,state FROM ctt_state';
@@ -44,7 +102,7 @@ server.get('/order',(req,res)=>{
       pool.query(sql,[id],(error,results)=>{
         if(error) throw error;
         res.send({
-          cood:200,
+          code:200,
           message:"查询成功",
           results:results
         })
@@ -54,7 +112,7 @@ server.get('/order',(req,res)=>{
           pool.query(sql,[id],(error,results)=>{
             if(error) throw error;
             res.send({
-              cood:200,
+              code:200,
               message:"查询成功",
               results:results
             })
@@ -126,6 +184,23 @@ server.get('/goods', (req, res) => {
 
 
 
+
+
+
+
+//详情页接口
+server.get("/details",(req,res)=>{
+  let sql = "SELECT details FROM ctt_goods";
+  pool.query(sql,(error,results)=>{
+    if(error) throw error;
+    res.send({
+      code:200,
+      message:"查询成功",
+      results:results
+    })
+    // console.log(results);
+  })
+})
 
 
 

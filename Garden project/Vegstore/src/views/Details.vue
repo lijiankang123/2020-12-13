@@ -1,8 +1,9 @@
 <template>
   <div>
     <mt-header
-    title="这是详情页">
-    <router-link slot="left" to="/order">
+    title="这是详情页"
+    class="top">
+      <router-link slot="left" to="/order">
       <mt-button icon="back"></mt-button>
     </router-link>
     </mt-header>
@@ -10,9 +11,9 @@
     <!-- 轮播图 -->
     <div>
       <mt-swipe :auto="4000" class="swipe">
-        <mt-swipe-item><img src="../assets/images/fruits/fruit/0e41b5450ec5c7a3.jpg" alt=""></mt-swipe-item>
-        <mt-swipe-item><img src="../assets/images/fruits/fruit/1aa6963f05b79277.jpg" alt=""></mt-swipe-item>
-        <mt-swipe-item><img src="../assets/images/fruits/fruit/3c69627c34564a5d.jpg" alt=""></mt-swipe-item>
+        <mt-swipe-item><img src="../assets/images/vegetables/vegetable/13e8d2cc34417894.jpg" alt=""></mt-swipe-item>
+        <mt-swipe-item><img src="../assets/images/vegetables/vegetable/420704ba59ee2b25.jpg" alt=""></mt-swipe-item>
+        <mt-swipe-item><img src="../assets/images/vegetables/vegetable/c333623c20729e34.jpg" alt=""></mt-swipe-item>
       </mt-swipe>
     </div>
 
@@ -51,21 +52,33 @@
     <!-- 图文 -->
     <div class="image-text">
       <p>图文详情</p>
-      
+       <div class="rich-content" v-html="details[1].details"></div>
     </div>
+
   </div>
 </template>
 
 <script>
-import {Swipe, SwipeItem} from 'mint-ui'
-
- import 'mint-ui/lib/style.css'
 export default {
-  
+  data(){
+    return {
+      details:[]
+    }
+  },
+  mounted(){
+    this.axios.get("/details").then((res)=>{
+      let results = res.data.results;
+      this.details = results;
+    })
+  },
 }
 </script>
 
 <style scoped>
+  .top{
+    background-color: red;
+    color: white;
+  }
   .swipe{
     width: 375px;
     height: 200px;
@@ -143,5 +156,15 @@ export default {
     font-size: 13px;
     font-weight: lighter;
   }
+ .image-text{
+   padding: 10px;
+   background-color: #ccc;
+ }
+ .image-text>p{
+   color: red;
+   font-size: 20px;
+   font-weight: bold;
+   margin-bottom: 5px;
+ }
 </style>
 

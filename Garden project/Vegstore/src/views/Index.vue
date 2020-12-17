@@ -164,7 +164,7 @@ export default {
           
           goods.forEach(good=>{
               if(good.image != null){
-                good.image = require("../assets/images/" + good.image);
+                good.image = require("../assets/images/vegetables/vegetable/" + good.image);
               }
               this.goods.push(good);
           });

@@ -67,7 +67,7 @@
 
             <!-- <div class="main-top">
               <div class="main-time">
-                <p>2020/12/5</p>
+                <p id="d>2020/12/5</p>
                 <p>待提货</p>
               </div>
               <div class="main-image">
