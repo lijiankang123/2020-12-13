@@ -142,7 +142,7 @@
   margin-top: 5px;
 }
 .main-top {
-  background-color: lightblue;
+  /* background-color: lightgray; */
   padding: 10px;
 }
 .main-time {
@@ -240,7 +240,7 @@ export default {
   },
   watch:{
     active(val){
-      console.log(val)
+      // console.log(val)
       this.goods = [];
       this.axios.get('/order',{
         params:{

@@ -10,10 +10,15 @@ import Shopcart from '../views/Shopcart'
 import Index from '../views/Index'
 import Register1 from '../views/Register1'
 import Login1 from '../views/Login1'
+import Index2 from '../views/Index2'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/Index2',
+    component:Index2
+  },
   {
     path:'/login1',
     component:Login1
